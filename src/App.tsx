@@ -2,8 +2,6 @@ import { useState } from "react";
 import AppContainer from "./components/AppContainer";
 import { ThemeContext } from "./context.ts";
 
-export type Theme = [boolean, (newTheme: boolean) => void];
-
 const App = () => {
   const [theme, setTheme] = useState(() => {
     const currentTheme = localStorage.getItem("theme");
@@ -12,7 +10,7 @@ const App = () => {
 
   return (
     <section
-      className={`relative grid pt-[5rem] justify-center min-h-screen ${
+      className={`relative grid py-[5rem] justify-center min-h-screen ${
         theme ? "bg-slate-950" : "bg-white"
       }`}
     >
@@ -29,7 +27,7 @@ const App = () => {
       )}
 
       <ThemeContext.Provider value={[theme, setTheme]}>
-        <AppContainer />
+        <AppContainer theme={theme} />
       </ThemeContext.Provider>
     </section>
   );

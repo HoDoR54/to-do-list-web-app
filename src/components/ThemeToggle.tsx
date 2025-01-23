@@ -12,7 +12,7 @@ const ThemeToggle = () => {
   return (
     <button onClick={switchTheme}>
       {theme ? (
-        <i className="fa-regular fa-sun"></i>
+        <i className="text-white fa-regular fa-sun"></i>
       ) : (
         <i className="fa-solid fa-moon"></i>
       )}
