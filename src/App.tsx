@@ -1,5 +1,8 @@
 import { useState } from "react";
-import Box from "./components/Box";
+import AppContainer from "./components/AppContainer";
+import { ThemeContext } from "./context.ts";
+
+export type Theme = [boolean, (newTheme: boolean) => void];
 
 const App = () => {
   const [theme, setTheme] = useState(() => {
@@ -7,22 +10,28 @@ const App = () => {
     return currentTheme ? JSON.parse(currentTheme) : true;
   });
 
-  const switchTheme = () => {
-    const newTheme = !theme;
-    setTheme(newTheme);
-
-    localStorage.setItem("theme", JSON.stringify(newTheme));
-    console.log(theme);
-  };
-
   return (
-    <div
-      className={`grid items-center justify-center min-h-screen ${
-        theme ? "bg-black" : "bg-white"
+    <section
+      className={`relative grid pt-[5rem] justify-center min-h-screen ${
+        theme ? "bg-slate-950" : "bg-white"
       }`}
     >
-      <Box theme={theme} switchTheme={switchTheme} />
-    </div>
+      {theme ? (
+        <img
+          src="../images/bg-desktop-dark.jpg"
+          className="absolute top-0 left-0 right-0 w-full"
+        />
+      ) : (
+        <img
+          src="../images/bg-desktop-light.jpg"
+          className="absolute top-0 left-0 right-0 w-full"
+        />
+      )}
+
+      <ThemeContext.Provider value={[theme, setTheme]}>
+        <AppContainer />
+      </ThemeContext.Provider>
+    </section>
   );
 };
 
