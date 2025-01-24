@@ -3,6 +3,9 @@ import BottomBar from "./BottomBar";
 import Header from "./Header";
 import Input from "./Input";
 import ListBox from "./ListBox";
+import { TodoListContext } from "../context";
+
+export type TodoList = [string[], (newTodoLiist: string[]) => void];
 
 interface AppContainerProps {
   theme: boolean;
@@ -34,11 +37,13 @@ const AppContainer: React.FC<AppContainerProps> = ({ theme }) => {
   };
 
   return (
-    <section className="z-10 flex flex-col gap-5 max-h-max md:w-[500px]">
+    <section className="z-10 flex flex-col gap-5 max-h-max md:w-[500px] w-[300px]">
       <Header theme={theme} />
       <Input addTodo={addTodo} theme={theme} />
       <ListBox todoList={todo} deleteTodo={deleteTodo} theme={theme} />
-      <BottomBar theme={theme} />
+      <TodoListContext.Provider value={[todo, setTodo]}>
+        <BottomBar theme={theme} todoList={todo} />
+      </TodoListContext.Provider>
     </section>
   );
 };
