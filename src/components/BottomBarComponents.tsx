@@ -16,7 +16,7 @@ export const LeftItemsDisplay: React.FC<LeftItemsDisplayProps> = ({
       className={`cursor-pointer ${
         theme
           ? "hover:text-white text-gray-400"
-          : "hover:text-black text-gray-700"
+          : "hover:text-black text-gray-500"
       }`}
     >
       {todoList.length} items left
@@ -38,7 +38,7 @@ export const DeleteAll = () => {
       className={`cursor-pointer ${
         theme
           ? "hover:text-white text-gray-400"
-          : "hover:text-black text-gray-700"
+          : "hover:text-black text-gray-500"
       }`}
       onClick={deleteAllTodo}
     >

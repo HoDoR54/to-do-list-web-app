@@ -10,6 +10,7 @@ interface BottomBarProps {
 
 const BottomBar: React.FC<BottomBarProps> = ({ todoList }) => {
   const [theme, _] = useThemeContext();
+
   return (
     <div
       className={`flex justify-between w-full px-5 py-2 rounded-md text-sm font-thin ${

@@ -1,4 +1,3 @@
-import React from "react";
 import { TodoType } from "./AppContainer";
 import { useThemeContext } from "../context";
 
@@ -10,20 +9,27 @@ interface ListItemProps {
 
 const ListItem: React.FC<ListItemProps> = ({ task, index, deleteTodo }) => {
   const [theme, _] = useThemeContext();
+
   return (
     <li
-      className={`relative px-5 py-2 rounded-md ${
+      className={`relative pl-5 text-sm sm:text-base py-2 pr-10 flex rounded-md ${
         !theme ? "bg-white text-black shadow" : "bg-slate-800 text-white"
       }`}
     >
-      {task.task}
+      <div className="w-[2rem] flex items-center">
+        {!task.status ? (
+          <span className="w-4 h-4 border-2 border-blue-700 rounded-full cursor-pointer hover:scale-105 active:scale-100"></span>
+        ) : (
+          <span className="w-4 h-4 bg-blue-700 border-2 border-blue-700 rounded-full cursor-pointer hover:scale-105 active:scale-100"></span>
+        )}
+      </div>
+      <span>{task.task}</span>
+
       <span
-        className="absolute transform -translate-y-1/2 cursor-pointer right-3 top-1/2"
-        onClick={() => {
-          deleteTodo(index);
-        }}
+        className="absolute transform -translate-y-1/2 cursor-pointer right-3 top-1/2 hover:scale-105 active:scale-100"
+        onClick={() => deleteTodo(index)}
       >
-        X
+        <i className="w-4 text-blue-700 fa-regular fa-circle-xmark"></i>
       </span>
     </li>
   );
