@@ -1,15 +1,16 @@
 import React from "react";
 import { useTodoListTContext } from "../context";
+import { TodoType } from "./AppContainer";
+import { useThemeContext } from "../context";
 
 interface LeftItemsDisplayProps {
-  todoList: string[];
-  theme: boolean;
+  todoList: TodoType[];
 }
 
 export const LeftItemsDisplay: React.FC<LeftItemsDisplayProps> = ({
   todoList,
-  theme,
 }) => {
+  const [theme, _] = useThemeContext();
   return (
     <p
       className={`cursor-pointer ${
@@ -23,17 +24,14 @@ export const LeftItemsDisplay: React.FC<LeftItemsDisplayProps> = ({
   );
 };
 
-interface DeleteAllProps {
-  theme: boolean;
-}
-
-export const DeleteAll: React.FC<DeleteAllProps> = ({ theme }) => {
+export const DeleteAll = () => {
   const [_, setTodoList] = useTodoListTContext();
 
   const deleteAllTodo = () => {
     setTodoList([]);
     localStorage.setItem("to-do-list", JSON.stringify([]));
   };
+  const [theme, __] = useThemeContext();
 
   return (
     <p

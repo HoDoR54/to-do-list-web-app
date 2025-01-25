@@ -1,20 +1,24 @@
 import React, { useState } from "react";
+import { TodoType } from "./AppContainer";
+import { useThemeContext } from "../context";
 
 interface InputProps {
-  addTodo: (newTodo: string) => void;
-  theme: boolean;
+  addTodo: (newTodo: TodoType) => void;
 }
 
-const Input: React.FC<InputProps> = ({ addTodo, theme }) => {
+const Input: React.FC<InputProps> = ({ addTodo }) => {
   const [inputValue, setInputValue] = useState("");
 
   const handleSubmission = (e: any) => {
     e.preventDefault();
     if (inputValue.trim()) {
-      addTodo(inputValue);
+      const newTodo: TodoType = { task: inputValue, status: false };
+      addTodo(newTodo);
       setInputValue("");
     }
   };
+
+  const [theme, _] = useThemeContext();
 
   return (
     <form onSubmit={handleSubmission}>

@@ -1,11 +1,8 @@
-import React from "react";
 import ThemeToggle from "./ThemeToggle";
+import { useThemeContext } from "../context";
 
-interface HeaderProps {
-  theme: boolean;
-}
-
-const Header: React.FC<HeaderProps> = ({ theme }) => {
+const Header = () => {
+  const [theme, _] = useThemeContext();
   return (
     <div className="flex justify-between">
       <h1

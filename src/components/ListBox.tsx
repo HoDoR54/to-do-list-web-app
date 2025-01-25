@@ -1,13 +1,16 @@
 import React from "react";
 import ListItem from "./ListItem";
+import { TodoType } from "./AppContainer";
+import { useThemeContext } from "../context";
 
 interface ListBoxProps {
-  todoList: string[];
+  todoList: TodoType[];
   deleteTodo: (index: number) => void;
-  theme: boolean;
 }
 
-const ListBox: React.FC<ListBoxProps> = ({ todoList, deleteTodo, theme }) => {
+const ListBox: React.FC<ListBoxProps> = ({ todoList, deleteTodo }) => {
+  const [theme, _] = useThemeContext();
+
   return (
     <ul className="flex flex-col-reverse w-full gap-1">
       {todoList.length > 0 ? (
@@ -16,7 +19,6 @@ const ListBox: React.FC<ListBoxProps> = ({ todoList, deleteTodo, theme }) => {
             task={task}
             index={index}
             deleteTodo={deleteTodo}
-            theme={theme}
             key={index}
           />
         ))

@@ -5,22 +5,31 @@ import Input from "./Input";
 import ListBox from "./ListBox";
 import { TodoListContext } from "../context";
 
-export type TodoList = [string[], (newTodoLiist: string[]) => void];
+export type TodoList = [TodoType[], (newTodoLiist: TodoType[]) => void];
+export type TodoType = { task: string; status: boolean };
 
-interface AppContainerProps {
-  theme: boolean;
-}
-
-const AppContainer: React.FC<AppContainerProps> = ({ theme }) => {
-  const [todo, setTodo] = useState<string[]>(() => {
+const AppContainer = () => {
+  const [todo, setTodo] = useState<TodoType[]>(() => {
     const currentTodo = localStorage.getItem("to-do-list");
     return currentTodo
       ? JSON.parse(currentTodo)
       : [
-          "To walk the dog",
-          "To read for 30 minutes",
-          "To meditate for an hour",
-          "To take a nap",
+          {
+            task: "To walk the dog",
+            status: false,
+          },
+          {
+            task: "To read for 30 minutes",
+            status: false,
+          },
+          {
+            task: "To medidate for an hour",
+            status: false,
+          },
+          {
+            task: "To take a nap",
+            status: false,
+          },
         ];
   });
 
@@ -28,7 +37,7 @@ const AppContainer: React.FC<AppContainerProps> = ({ theme }) => {
     localStorage.setItem("to-do-list", JSON.stringify(todo));
   }, [todo]);
 
-  const addTodo = (newTodo: string) => {
+  const addTodo = (newTodo: TodoType) => {
     setTodo([...todo, newTodo]);
   };
 
@@ -38,11 +47,11 @@ const AppContainer: React.FC<AppContainerProps> = ({ theme }) => {
 
   return (
     <section className="z-10 flex flex-col gap-5 max-h-max md:w-[500px] w-[300px]">
-      <Header theme={theme} />
-      <Input addTodo={addTodo} theme={theme} />
-      <ListBox todoList={todo} deleteTodo={deleteTodo} theme={theme} />
+      <Header />
+      <Input addTodo={addTodo} />
+      <ListBox todoList={todo} deleteTodo={deleteTodo} />
       <TodoListContext.Provider value={[todo, setTodo]}>
-        <BottomBar theme={theme} todoList={todo} />
+        <BottomBar todoList={todo} />
       </TodoListContext.Provider>
     </section>
   );

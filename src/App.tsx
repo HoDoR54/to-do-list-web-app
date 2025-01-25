@@ -41,7 +41,7 @@ const App = () => {
       )}
 
       <ThemeContext.Provider value={[theme, setTheme]}>
-        <AppContainer theme={theme} />
+        <AppContainer />
       </ThemeContext.Provider>
     </section>
   );

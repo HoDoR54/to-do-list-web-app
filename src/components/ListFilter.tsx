@@ -1,13 +1,7 @@
-// import { useState } from "react";
+import { useThemeContext } from "../context";
 
-interface ListFilterProps {
-  theme: boolean;
-}
-
-const ListFilter: React.FC<ListFilterProps> = ({ theme }) => {
-  //   const [filter, setFilter] = useState("all");
-
-  //   const allFilter = () => {};
+const ListFilter = () => {
+  const [theme, _] = useThemeContext();
 
   return (
     <ul className="flex gap-5">
