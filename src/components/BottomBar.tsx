@@ -1,8 +1,13 @@
 import { DeleteAll, LeftItemsDisplay } from "./BottomBarComponents";
 import ListFilter from "./ListFilter";
 import { useThemeContext } from "../context";
+import React from "react";
 
-const BottomBar = () => {
+interface BottomBarProps {
+  filterTodoList: (filterName: string) => void;
+}
+
+const BottomBar: React.FC<BottomBarProps> = ({ filterTodoList }) => {
   const [theme, _] = useThemeContext();
 
   return (
@@ -12,7 +17,7 @@ const BottomBar = () => {
       }`}
     >
       <LeftItemsDisplay />
-      <ListFilter />
+      <ListFilter filterTodoList={filterTodoList} />
       <DeleteAll />
     </div>
   );

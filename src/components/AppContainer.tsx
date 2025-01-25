@@ -35,6 +35,7 @@ const AppContainer = () => {
 
   useEffect(() => {
     localStorage.setItem("to-do-list", JSON.stringify(todo));
+    setFilteredList(todo);
   }, [todo]);
 
   const addTodo = (newTodo: TodoType) => {
@@ -45,13 +46,27 @@ const AppContainer = () => {
     setTodo(todo.filter((_, i) => i !== index));
   };
 
+  const [filteredList, setFilteredList] = useState<TodoType[]>(() => {
+    return todo;
+  });
+
+  const filterTodoList = (filterName: string) => {
+    if (filterName === "all") {
+      setFilteredList(todo);
+    } else if (filterName === "active") {
+      setFilteredList(todo.filter((task) => !task.status));
+    } else if (filterName === "completed") {
+      setFilteredList(todo.filter((task) => task.status));
+    }
+  };
+
   return (
     <section className="z-10 flex flex-col gap-5 max-h-max md:w-[500px] w-[300px]">
       <Header />
       <Input addTodo={addTodo} />
       <TodoListContext.Provider value={[todo, setTodo]}>
-        <ListBox deleteTodo={deleteTodo} />
-        <BottomBar />
+        <ListBox deleteTodo={deleteTodo} filteredList={filteredList} />
+        <BottomBar filterTodoList={filterTodoList} />
       </TodoListContext.Provider>
     </section>
   );

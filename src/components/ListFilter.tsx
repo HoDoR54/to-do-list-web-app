@@ -1,8 +1,13 @@
+import React from "react";
 import { useThemeContext } from "../context";
 
 const filters: string[] = ["all", "active", "completed"];
 
-const ListFilter = () => {
+interface ListFilterProps {
+  filterTodoList: (filterName: string) => void;
+}
+
+const ListFilter: React.FC<ListFilterProps> = ({ filterTodoList }) => {
   const [theme, _] = useThemeContext();
 
   return (
@@ -14,6 +19,9 @@ const ListFilter = () => {
               ? "hover:text-white text-gray-400"
               : "hover:text-black text-gray-500"
           }`}
+          onClick={() => {
+            filterTodoList(filter);
+          }}
           key={index}
         >
           <span>{filter}</span>
