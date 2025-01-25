@@ -49,9 +49,9 @@ const AppContainer = () => {
     <section className="z-10 flex flex-col gap-5 max-h-max md:w-[500px] w-[300px]">
       <Header />
       <Input addTodo={addTodo} />
-      <ListBox todoList={todo} deleteTodo={deleteTodo} />
       <TodoListContext.Provider value={[todo, setTodo]}>
-        <BottomBar todoList={todo} />
+        <ListBox deleteTodo={deleteTodo} />
+        <BottomBar />
       </TodoListContext.Provider>
     </section>
   );

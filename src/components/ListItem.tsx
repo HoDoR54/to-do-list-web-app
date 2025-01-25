@@ -1,5 +1,6 @@
 import { TodoType } from "./AppContainer";
 import { useThemeContext } from "../context";
+import { useTodoListTContext } from "../context";
 
 interface ListItemProps {
   task: TodoType;
@@ -9,6 +10,13 @@ interface ListItemProps {
 
 const ListItem: React.FC<ListItemProps> = ({ task, index, deleteTodo }) => {
   const [theme, _] = useThemeContext();
+  const [todo, setTodo] = useTodoListTContext();
+
+  const updateTodoStatus = (idx: number) => {
+    const newTodo = [...todo];
+    newTodo[idx].status = !newTodo[idx].status;
+    setTodo(newTodo);
+  };
 
   return (
     <li
@@ -18,12 +26,26 @@ const ListItem: React.FC<ListItemProps> = ({ task, index, deleteTodo }) => {
     >
       <div className="w-[2rem] flex items-center">
         {!task.status ? (
-          <span className="w-4 h-4 border-2 border-blue-700 rounded-full cursor-pointer hover:scale-105 active:scale-100"></span>
+          <span
+            className="w-4 h-4 border-2 border-blue-700 rounded-full cursor-pointer hover:scale-105 active:scale-100"
+            onClick={() => {
+              updateTodoStatus(index);
+            }}
+          ></span>
         ) : (
-          <span className="w-4 h-4 bg-blue-700 border-2 border-blue-700 rounded-full cursor-pointer hover:scale-105 active:scale-100"></span>
+          <span
+            className="w-4 h-4 bg-blue-300 border-2 border-blue-700 rounded-full cursor-pointer hover:scale-105 active:scale-100"
+            onClick={() => {
+              updateTodoStatus(index);
+            }}
+          ></span>
         )}
       </div>
-      <span>{task.task}</span>
+      {!task.status ? (
+        <span>{task.task}</span>
+      ) : (
+        <del className="text-gray-500">{task.task}</del>
+      )}
 
       <span
         className="absolute transform -translate-y-1/2 cursor-pointer right-3 top-1/2 hover:scale-105 active:scale-100"

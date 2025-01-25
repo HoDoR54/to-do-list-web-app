@@ -1,16 +1,12 @@
-import React from "react";
 import { useTodoListTContext } from "../context";
-import { TodoType } from "./AppContainer";
 import { useThemeContext } from "../context";
 
-interface LeftItemsDisplayProps {
-  todoList: TodoType[];
-}
+export const LeftItemsDisplay = ({}) => {
+  const [todo, __] = useTodoListTContext();
 
-export const LeftItemsDisplay: React.FC<LeftItemsDisplayProps> = ({
-  todoList,
-}) => {
   const [theme, _] = useThemeContext();
+
+  const activeItems = todo.filter((task) => !task.status);
   return (
     <p
       className={`cursor-pointer ${
@@ -19,7 +15,7 @@ export const LeftItemsDisplay: React.FC<LeftItemsDisplayProps> = ({
           : "hover:text-black text-gray-500"
       }`}
     >
-      {todoList.length} items left
+      {activeItems.length} items left
     </p>
   );
 };

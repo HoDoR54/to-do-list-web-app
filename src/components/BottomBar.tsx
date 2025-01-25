@@ -1,14 +1,8 @@
-import React from "react";
 import { DeleteAll, LeftItemsDisplay } from "./BottomBarComponents";
 import ListFilter from "./ListFilter";
-import { TodoType } from "./AppContainer";
 import { useThemeContext } from "../context";
 
-interface BottomBarProps {
-  todoList: TodoType[];
-}
-
-const BottomBar: React.FC<BottomBarProps> = ({ todoList }) => {
+const BottomBar = () => {
   const [theme, _] = useThemeContext();
 
   return (
@@ -17,7 +11,7 @@ const BottomBar: React.FC<BottomBarProps> = ({ todoList }) => {
         !theme ? "bg-white text-gray-900 shadow" : "bg-slate-800 text-gray-200"
       }`}
     >
-      <LeftItemsDisplay todoList={todoList} />
+      <LeftItemsDisplay />
       <ListFilter />
       <DeleteAll />
     </div>

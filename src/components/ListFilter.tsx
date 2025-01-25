@@ -7,13 +7,14 @@ const ListFilter = () => {
 
   return (
     <ul className="flex gap-5">
-      {filters.map((filter) => (
+      {filters.map((filter, index) => (
         <li
           className={`cursor-pointer ${
             theme
               ? "hover:text-white text-gray-400"
               : "hover:text-black text-gray-500"
           }`}
+          key={index}
         >
           <span>{filter}</span>
         </li>

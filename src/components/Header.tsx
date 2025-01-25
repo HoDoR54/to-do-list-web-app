@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <div className="flex justify-between">
       <h1
-        className={`text-3xl font-bold ${theme ? "text-black" : "text-white"}`}
+        className={`text-3xl font-bold ${!theme ? "text-black" : "text-white"}`}
       >
         To-Do
       </h1>
