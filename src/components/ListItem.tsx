@@ -20,7 +20,7 @@ const ListItem: React.FC<ListItemProps> = ({ task, index, deleteTodo }) => {
 
   return (
     <li
-      className={`relative pl-5 text-sm sm:text-base py-2 pr-10 flex rounded-md ${
+      className={`relative px-5 text-sm sm:text-base py-2 flex rounded-md ${
         !theme ? "bg-white text-black shadow" : "bg-slate-800 text-white"
       }`}
     >
@@ -42,13 +42,13 @@ const ListItem: React.FC<ListItemProps> = ({ task, index, deleteTodo }) => {
         )}
       </div>
       {!task.status ? (
-        <span>{task.task}</span>
+        <span className="flex-1 pr-3">{task.task}</span>
       ) : (
-        <del className="text-gray-500">{task.task}</del>
+        <del className="flex-1 pr-3 text-gray-500">{task.task}</del>
       )}
 
       <span
-        className="absolute transform -translate-y-1/2 cursor-pointer right-3 top-1/2 hover:scale-105 active:scale-100"
+        className="cursor-pointer hover:scale-105 active:scale-100"
         onClick={() => deleteTodo(index)}
       >
         <i className="w-4 text-blue-700 fa-regular fa-circle-xmark"></i>
